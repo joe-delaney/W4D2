@@ -69,14 +69,14 @@ class Board
   def move_piece(start_pos, end_pos)
     raise "Invalid Start Position" if self[start_pos].is_a?(NullPiece)
 
-    if !self[end_pos].is_a?(NullPiece) && self[end_pos].color == self[start_pos].color
+    if !self[end_pos].is_a?(NullPiece) 
+      && self[end_pos].color == self[start_pos].color
       raise "Invalid End Position" 
-    elsif !self[end_pos].is_a?(NullPiece)
+    else
       moved = self[start_pos]
       self[end_pos] = moved
       self[start_pos] = NullPiece.instance
     end
-    
   end
 
   def print_board 
