@@ -4,11 +4,10 @@ class Board
   
   attr_accessor :rows
   
-
   def fill_board 
     row_to_fill = [0,1, self.rows.length-2, self.rows.length-1]
     row_to_fill.each do |row|
-      (0...rows[row].length).each { |col| rows[row][col] = Knight.new(:b, self, [row,col]) }
+      (0...rows[row].length).each { |col| rows[row][col] = Pawn.new(:b, self, [row,col]) }
     end
   end
 

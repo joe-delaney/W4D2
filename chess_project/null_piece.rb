@@ -16,6 +16,3 @@ class NullPiece < Piece
     @color = value
   end
 end
-
-n = NullPiece.instance
-p n
