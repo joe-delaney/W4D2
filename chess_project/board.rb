@@ -68,13 +68,18 @@ class Board
 
   def move_piece(start_pos, end_pos)
     raise "Invalid Start Position" if self[start_pos].is_a?(NullPiece)
-    raise "Invalid End Position" if !self[end_pos].is_a?(NullPiece)
-    moved = self[start_pos]
-    self[end_pos] = moved
-    self[start_pos] = NullPiece.instance
+
+    if !self[end_pos].is_a?(NullPiece) && self[end_pos].color == self[start_pos].color
+      raise "Invalid End Position" 
+    elsif !self[end_pos].is_a?(NullPiece)
+      moved = self[start_pos]
+      self[end_pos] = moved
+      self[start_pos] = NullPiece.instance
+    end
+    
   end
 
-  def print_bord 
+  def print_board 
     narr = []
     @rows.each do |w|
         x = []
@@ -95,21 +100,8 @@ class Board
 
 b = Board.new
 p '-----'
-
-# b.print_bord
-# b.move_piece([1,1],[3,3])
-# p '-----'
-
-b.print_bord
-# p '-----'
-
-# b.move_piece([1,1], [0,0])
-# # b.move_piece
-# # p '-----'
-
-# b.print_bord
-
+b.print_board
 pawn_move = b[[1,0]].moves[0]
 p pawn_move
 b.move_piece([1,0], pawn_move)
-b.print_bord
+b.print_board
