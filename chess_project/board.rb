@@ -5,10 +5,46 @@ class Board
   attr_accessor :rows
   
   def fill_board 
-    row_to_fill = [0,1, self.rows.length-2, self.rows.length-1]
-    row_to_fill.each do |row|
-      (0...rows[row].length).each { |col| rows[row][col] = Pawn.new(:b, self, [row,col]) }
+    pawn_rows = [1, self.rows.length-2]
+    knight_pos = [[0,1], [7,1], [0,6], [7,6]]
+    king_pos = [[0,3], [7,3]]
+    queen_pos = [[0,4], [7,4]]
+    bishop_pos = [[0,2],[7,2],[0,5], [7,5]]
+    rook_pos = [[0,0], [7,0], [0,7], [7,7]]
+    null_piece_pos = (2...self.rows.length-2).to_a
+
+    pawn_rows.each do |row|
+      (0...rows[row].length).each { |col| rows[row][col] = Pawn.new(:white, self, [row,col]) }
     end
+
+    knight_pos.each do |pos|
+      self[pos] = Knight.new(:white, self, pos)
+    end
+
+    king_pos.each do |pos|
+      self[pos] = King.new(:white, self, pos)
+    end
+
+    queen_pos.each do |pos|
+      self[pos] = Queen.new(:white, self, pos)
+    end
+
+    bishop_pos.each do |pos|
+      self[pos] = Bishop.new(:white, self, pos)
+    end
+
+    rook_pos.each do |pos|
+      self[pos] = Rook.new(:white, self, pos)
+    end
+
+    null_piece_pos.each do |row|
+      (0...rows[row].length).each { |col| rows[row][col] = NullPiece.instance }
+    end
+
+    [0,1].each do |row|
+      (0...rows[row].length).each { |col| rows[row][col].color = :black }
+    end
+
   end
 
   def initialize
@@ -31,11 +67,11 @@ class Board
   end
 
   def move_piece(start_pos, end_pos)
-    raise "Invalid Start Position" if self[start_pos].nil? 
-    raise "Invalid End Position" if !self[end_pos].nil?
+    raise "Invalid Start Position" if self[start_pos].is_a?(NullPiece)
+    raise "Invalid End Position" if !self[end_pos].is_a?(NullPiece)
     moved = self[start_pos]
     self[end_pos] = moved
-    self[start_pos] = nil 
+    self[start_pos] = NullPiece.instance
   end
 
   def print_bord 
@@ -73,4 +109,7 @@ b.print_bord
 
 # b.print_bord
 
-p b[[6,0]].moves
+pawn_move = b[[1,0]].moves[0]
+p pawn_move
+b.move_piece([1,0], pawn_move)
+b.print_bord

@@ -1,7 +1,6 @@
 module Stepable 
   require "byebug"
   def moves 
-    # debugger
     possible_moves = []
     directions = move_diffs 
     directions.each do |direction|
@@ -17,7 +16,7 @@ module Stepable
   private 
   def valid?(pos)
     row, col = pos 
-    row >= 0 && col >= 0 && row < board.length && col < board.length && board[pos].nil? 
+    row >= 0 && col >= 0 && row < board.length && col < board.length && board[pos].is_a?(NullPiece)
   end
 
   def move_diffs 
