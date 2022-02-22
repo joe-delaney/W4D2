@@ -1,4 +1,4 @@
-require_relative 'piece.rb'
+require_relative 'inheritance.rb'
 class Board 
   BOARD_SIZE = 8
   
@@ -8,7 +8,7 @@ class Board
   def fill_board 
     row_to_fill = [0,1, self.rows.length-2, self.rows.length-1]
     row_to_fill.each do |row|
-      (0...rows[row].length).each { |col| rows[row][col] = Piece.new }
+      (0...rows[row].length).each { |col| rows[row][col] = Knight.new(:b, self, [row,col]) }
     end
   end
 
@@ -27,6 +27,10 @@ class Board
     @rows[row][col] = val
   end
 
+  def length 
+    BOARD_SIZE
+  end
+
   def move_piece(start_pos, end_pos)
     raise "Invalid Start Position" if self[start_pos].nil? 
     raise "Invalid End Position" if !self[end_pos].nil?
@@ -43,7 +47,7 @@ class Board
         if i == nil 
           x << 'o'
         else
-          x << i.i_i
+          x << i.to_s
         end
       end
       narr << x 
@@ -64,8 +68,10 @@ p '-----'
 b.print_bord
 # p '-----'
 
-b.move_piece([1,1], [0,0])
-# b.move_piece
-# p '-----'
+# b.move_piece([1,1], [0,0])
+# # b.move_piece
+# # p '-----'
 
-b.print_bord
+# b.print_bord
+
+p b[[6,0]].moves
