@@ -102,7 +102,8 @@ b = Board.new
 p '-----'
 b.print_board
 
-p b[[1,4]].moves
+p b[[6,1]].moves
+# b.move_piece([1,4])
 
 
 
