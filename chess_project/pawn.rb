@@ -31,14 +31,12 @@ class Pawn < Piece
   private 
   def valid?(pos)
     row, col = pos 
-    (row >= 0 && col >= 0 && row < board.length && col < board.length 
-    && board[pos].is_a?(NullPiece))
+    row >= 0 && col >= 0 && row < board.length && col < board.length && board[pos].is_a?(NullPiece)
   end
 
   def valid_attack?(pos)
     row, col = pos 
-    (row >= 0 && col >= 0 && row < board.length && col < board.length 
-    && board[pos].color != color && !board[pos].is_a?(NullPiece))
+    row >= 0 && col >= 0 && row < board.length && col < board.length && board[pos].color != color && !board[pos].is_a?(NullPiece)
   end
 
   def forward_dir
@@ -62,11 +60,11 @@ class Pawn < Piece
   def side_attacks(pos)
     row, col = pos
     if color == :white
-      possible_attack_1 = [row-1][col-1]
-      possible_attack_2 = [row-1][col+1]
+      possible_attack_1 = [row-1, col-1]
+      possible_attack_2 = [row-1, col+1]
     else
-      possible_attack_1 = [row+1][col-1]
-      possible_attack_2 = [row+1][col+1]
+      possible_attack_1 = [row+1, col-1]
+      possible_attack_2 = [row+1, col+1]
     end
     [possible_attack_1, possible_attack_2]
   end

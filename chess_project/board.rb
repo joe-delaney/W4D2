@@ -102,5 +102,7 @@ b = Board.new
 p '-----'
 b.print_board
 
+p b[[1,4]].moves
+
 
 
