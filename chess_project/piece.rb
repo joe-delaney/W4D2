@@ -1,10 +1,11 @@
 class Piece 
+
   attr_reader :color, :board, :pos
-  attr_writer :color
   def initialize (color, board, pos)
     @color = color 
     @board = board 
     @pos = pos
+    #This adds this piece instance to the board at its pos
     board.add_piece(self, pos)
   end 
 
@@ -16,19 +17,11 @@ class Piece
     @pos = other_pos
   end
 
-  def moves 
-
-  end
-
   def color=(new_color)
     @color = new_color
   end
 
-  def valid_moves 
-
-  end
-
   def empty? 
-    return board[pos].nil? 
+    return board[pos].is_a?(NullPiece) 
   end 
 end 
