@@ -29,19 +29,20 @@ module Slideable
 
   require "byebug"
   def grow_unblocked_moves_in_dr(dx, dy)
-    # debugger
     start_pos = pos 
     unblocked_moves = []
-
     new_row = start_pos[0] + dx
     new_col = start_pos[1] + dy
     new_pos = [new_row, new_col ]
-    while board[new_pos].is_a?(NullPiece) && new_row >= 0 && new_col >= 0 && 
-      new_row < board.length && new_col < board.length
-      unblocked_moves << new_pos 
+    while (new_row >= 0 && new_col >= 0 && new_row < board.length && 
+      new_col < board.length && (board[new_pos].is_a?(NullPiece) || 
+      board[new_pos].color != color))
+
+      unblocked_moves << new_pos
       new_row = new_row + dx
       new_col = new_col + dy
       new_pos = [new_row, new_col]
+      
     end
     unblocked_moves
   end

@@ -84,7 +84,8 @@ class Board
 b = Board.new
 p '-----'
 b.print_board
-# pawn_move = b[[1,0]].moves[0]
+p b[[0,7]].moves
 # p pawn_move
-# b.move_piece([1,0], pawn_move)
+# b.move_piece([0,7], rook_move)
+# p '-----'
 # b.print_board
