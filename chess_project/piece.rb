@@ -12,6 +12,10 @@ class Piece
     return :P
   end
 
+  def pos=(other_pos)
+    @pos = other_pos
+  end
+
   def moves 
 
   end

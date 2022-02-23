@@ -38,6 +38,7 @@ class Board
     else
       moved = self[start_pos]
       self[end_pos] = moved
+      self[end_pos].pos = end_pos
       self[start_pos] = NullPiece.instance
     end
   end
@@ -63,19 +64,15 @@ class Board
   end
 
   def print_board 
-    narr = []
-    @rows.each do |w|
-        x = []
-      w.each do |i|
-        if i == nil 
-          x << 'o'
-        else
-          x << i.to_s
-        end
+    rows_to_s = []
+    @rows.each do |row|
+        new_row = []
+      row.each do |i|
+        new_row << i.to_s
       end
-      narr << x 
+      rows_to_s << new_row 
     end
-    narr.each do |ele|
+    rows_to_s.each do |ele|
       p ele.join(' ')
      end
   end
@@ -84,8 +81,6 @@ class Board
 b = Board.new
 p '-----'
 b.print_board
-p b[[0,7]].moves
-# p pawn_move
-# b.move_piece([0,7], rook_move)
-# p '-----'
-# b.print_board
+
+
+

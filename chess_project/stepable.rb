@@ -16,7 +16,8 @@ module Stepable
   private 
   def valid?(pos)
     row, col = pos 
-    row >= 0 && col >= 0 && row < board.length && col < board.length && board[pos].is_a?(NullPiece)
+    (row >= 0 && col >= 0 && row < board.length && col < board.length && 
+    (board[pos].is_a?(NullPiece) || board[pos].color != color))
   end
 
   def move_diffs 
