@@ -48,9 +48,18 @@ module Slideable
       new_col < board.length && (board[new_pos].is_a?(NullPiece) || 
       board[new_pos].color != color))
       unblocked_moves << new_pos
-      new_row = new_row + dx
-      new_col = new_col + dy
-      new_pos = [new_row, new_col]
+      if board[new_pos].color != color
+        #This if exists so that we only add a position with an opposite
+        #color piece once and exit the loop. Without this, we would be able
+        #to go through a piece of the opposite color to another space.
+        new_row = -1
+        new_col = -1
+        new_pos = [new_row, new_col]
+      else
+        new_row = new_row + dx
+        new_col = new_col + dy
+        new_pos = [new_row, new_col]
+      end
     end
     unblocked_moves
   end
