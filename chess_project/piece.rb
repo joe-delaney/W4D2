@@ -5,6 +5,7 @@ class Piece
     @color = color 
     @board = board 
     @pos = pos
+    board.add_piece(self, pos)
   end 
 
   def to_s 

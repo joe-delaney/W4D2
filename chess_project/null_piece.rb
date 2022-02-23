@@ -3,16 +3,15 @@ require 'singleton'
 
 class NullPiece < Piece
   include Singleton
+
+  attr_reader :color
+
   def initialize
     @symbol = " "
-    @color = nil
+    @color = :none
   end 
 
   def to_s 
     @symbol
-  end
-
-  def color=(value)
-    @color = value
   end
 end
