@@ -1,4 +1,4 @@
-require_relative 'inheritance.rb'
+require_relative 'pieces.rb'
 class Board 
   BOARD_SIZE = 8
   
